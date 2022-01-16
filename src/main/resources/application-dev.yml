@@ -1,0 +1,25 @@
+spring:
+  sql:    init:      platform: mysql
+  datasource:
+    # 172.17.206.83 my.docker.local
+    # url: jdbc:mariadb://172.17.206.83:3306/recipe_dev
+    url: jdbc:mariadb://localhost:3306/recipe_dev
+    username: recipe_dev_user
+    password: recipe
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
+    database: mysql
+    show-sql: true
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: src/main/resources/scripts/recipe_db_create.sql
+  
+      
+    

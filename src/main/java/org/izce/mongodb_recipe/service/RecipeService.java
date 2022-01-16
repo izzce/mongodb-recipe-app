@@ -1,0 +1,21 @@
+package org.izce.mongodb_recipe.service;
+
+import java.util.List;
+
+import org.izce.mongodb_recipe.commands.CategoryCommand;
+import org.izce.mongodb_recipe.commands.RecipeCommand;
+import org.izce.mongodb_recipe.commands.UnitOfMeasureCommand;
+import org.izce.mongodb_recipe.model.Recipe;
+
+public interface RecipeService {
+	Iterable<Recipe> getRecipes();
+	Long getRecipesCount();
+	Recipe findById(Long id);
+	RecipeCommand findRecipeCommandById(Long id);
+	RecipeCommand saveRecipeCommand(RecipeCommand command);
+	CategoryCommand findCategoryByDescription(String description);
+	UnitOfMeasureCommand findUom(String uom);
+	UnitOfMeasureCommand findUom(Long uomId);
+	List<UnitOfMeasureCommand> findAllUoms();
+	void delete(Long recipeId);
+}
