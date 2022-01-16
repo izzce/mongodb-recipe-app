@@ -37,7 +37,7 @@ public class NoteController {
 	@PostMapping(value = "/recipe/{recipeId}/note/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Map<String, Object> addNote(
-			@PathVariable Long recipeId, 
+			@PathVariable String recipeId, 
 			@RequestBody NoteCommand note,
 			@ModelAttribute("recipe") RecipeCommand recipe,
 			Model model) throws Exception {
@@ -53,7 +53,7 @@ public class NoteController {
 	@PostMapping(value = "/recipe/{recipeId}/note/{noteId}/update", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Map<String, String> updateNote(
-			@PathVariable Long recipeId, 
+			@PathVariable String recipeId, 
 			@RequestBody NoteCommand note,
 			@ModelAttribute("recipe") RecipeCommand recipe,
 			Model model) throws Exception {
@@ -69,15 +69,15 @@ public class NoteController {
 
 	@DeleteMapping(value = "/recipe/{recipeId}/note/{noteId}/delete", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Map<String, Long> deleteNote(
+	public Map<String, String> deleteNote(
 			@ModelAttribute("recipe") RecipeCommand recipe,
-			@PathVariable Long recipeId, 
-			@PathVariable Long noteId, 
+			@PathVariable String recipeId, 
+			@PathVariable String noteId, 
 			Model model, 
 			HttpServletRequest req, 
 			HttpServletResponse resp) throws Exception {
 
-		boolean elementRemoved = recipe.getNotes().removeIf(e -> e.getId() == noteId);
+		boolean elementRemoved = recipe.getNotes().removeIf(e -> e.getId().equals(noteId));
 		if (!elementRemoved) {
 			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}

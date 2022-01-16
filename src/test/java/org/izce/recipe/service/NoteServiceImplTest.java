@@ -2,7 +2,7 @@ package org.izce.recipe.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,18 +39,18 @@ class NoteServiceImplTest {
 
 	@Test
 	void testFindById() {
-		when(noteRepository.findById(anyLong())).thenReturn(Optional.of(note1));
-		assertEquals(note1.getNote(), noteService.findById(1L).getNote());
+		when(noteRepository.findById(anyString())).thenReturn(Optional.of(note1));
+		assertEquals(note1.getNote(), noteService.findById("1").getNote());
 		
-		verify(noteRepository, times(1)).findById(anyLong());
+		verify(noteRepository, times(1)).findById(anyString());
 	}
 
 	@Test
 	void testFindNoteCommandById() {
-		when(noteRepository.findById(anyLong())).thenReturn(Optional.of(note1));
-		assertEquals(n2nc.convert(note1).getNote(), noteService.findNoteCommandById(anyLong()).getNote());
+		when(noteRepository.findById(anyString())).thenReturn(Optional.of(note1));
+		assertEquals(n2nc.convert(note1).getNote(), noteService.findNoteCommandById(anyString()).getNote());
 		
-		verify(noteRepository, times(1)).findById(anyLong());
+		verify(noteRepository, times(1)).findById(anyString());
 	}
 
 	@Test
@@ -65,8 +65,8 @@ class NoteServiceImplTest {
 
 	@Test
 	void testDelete() {
-		noteService.delete(1L);
-		verify(noteRepository, times(1)).deleteById(1L);
+		noteService.delete("1");
+		verify(noteRepository, times(1)).deleteById("1");
 	}
 
 }

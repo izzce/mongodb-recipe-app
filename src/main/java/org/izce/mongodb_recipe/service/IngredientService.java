@@ -7,11 +7,11 @@ import org.izce.mongodb_recipe.commands.UnitOfMeasureCommand;
 import org.izce.mongodb_recipe.model.Ingredient;
 
 public interface IngredientService {
-	Ingredient findById(Long id);
-	IngredientCommand findIngredientCommandById(Long id);
+	Ingredient findById(String id);
+	IngredientCommand findIngredientCommandById(String id);
 	IngredientCommand saveIngredientCommand(IngredientCommand command);
 	UnitOfMeasureCommand findUom(String uom);
-	UnitOfMeasureCommand findUom(Long uomId);
+	UnitOfMeasureCommand findUom(String uomId, boolean flag);
 	List<UnitOfMeasureCommand> findAllUoms();
-	void delete(Long ingredientId);
+	void delete(String ingredientId);
 }

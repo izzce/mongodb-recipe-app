@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class NoteCommandToNoteTest {
 
-    public static final Long ID_VALUE = 1L;
+    public static final String ID_VALUE = "1";
     public static final String RECIPE_NOTE = "Notes";
     NoteCommandToNote converter;
 
@@ -25,11 +25,6 @@ public class NoteCommandToNoteTest {
     @Test
     public void testNullParameter() throws Exception {
         assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new NoteCommand()));
     }
 
     @Test

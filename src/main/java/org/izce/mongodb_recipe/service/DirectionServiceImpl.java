@@ -33,13 +33,13 @@ public class DirectionServiceImpl implements DirectionService {
 	}
 	
 	@Override
-	public Direction findById(Long id) {
+	public Direction findById(String id) {
 		Optional<Direction> directionOptional = directionRepo.findById(id);
 		return directionOptional.orElseThrow(() -> new RuntimeException("Direction not found: " + id));
 	}
 
 	@Override
-	public DirectionCommand findDirectionCommandById(Long id) {
+	public DirectionCommand findDirectionCommandById(String id) {
 		return d2dc.convert(findById(id));
 	}
 	
@@ -56,7 +56,7 @@ public class DirectionServiceImpl implements DirectionService {
 	
 	@Override
 	@Transactional
-	public void delete(Long directionId) {
+	public void delete(String directionId) {
 		directionRepo.deleteById(directionId);
 		 
 		log.info("Deleted Direction: {}", directionId);		 

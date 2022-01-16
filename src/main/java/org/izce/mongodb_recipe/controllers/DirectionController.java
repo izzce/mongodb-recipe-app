@@ -37,7 +37,7 @@ public class DirectionController {
 	@PostMapping(value = "/recipe/{recipeId}/direction/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Map<String, String> addDirection(
-			@PathVariable Long recipeId, 
+			@PathVariable String recipeId, 
 			@RequestBody DirectionCommand direction,
 			@ModelAttribute("recipe") RecipeCommand recipe,
 			Model model) throws Exception {
@@ -47,7 +47,7 @@ public class DirectionController {
 		recipe.getDirections().add(savedDirection);
 		model.addAttribute("recipe", recipe);
 
-		return Map.of("id", savedDirection.getId().toString(), "direction", savedDirection.getDirection());
+		return Map.of("id", savedDirection.getId(), "direction", savedDirection.getDirection());
 	}
 	
 	@PostMapping(value = "/recipe/{recipeId}/direction/{directionId}/update", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,15 +69,15 @@ public class DirectionController {
 
 	@DeleteMapping(value = "/recipe/{recipeId}/direction/{directionId}/delete", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Map<String, Long> deleteDirection(
+	public Map<String, String> deleteDirection(
 			@ModelAttribute("recipe") RecipeCommand recipe,
-			@PathVariable Long recipeId, 
-			@PathVariable Long directionId, 
+			@PathVariable String recipeId, 
+			@PathVariable String directionId, 
 			Model model, 
 			HttpServletRequest req, 
 			HttpServletResponse resp) throws Exception {
 
-		boolean elementRemoved = recipe.getDirections().removeIf(e -> e.getId() == directionId);
+		boolean elementRemoved = recipe.getDirections().removeIf(e -> e.getId().equals(directionId));
 		if (!elementRemoved) {
 			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		} else {

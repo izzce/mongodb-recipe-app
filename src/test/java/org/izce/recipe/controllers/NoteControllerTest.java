@@ -37,12 +37,12 @@ public class NoteControllerTest {
 		MockitoAnnotations.openMocks(this);
 		noteController = new NoteController(noteService);
 		mockMvc = MockMvcBuilders.standaloneSetup(noteController).build();
-		recipe = new RecipeCommand(2L);
+		recipe = new RecipeCommand("2");
 	}
 
 	@Test
 	public void testAddNote() throws Exception {
-		NoteCommand dc = new NoteCommand(1L, "Cook", recipe.getId());
+		NoteCommand dc = new NoteCommand("1", "Cook", recipe.getId());
 		recipe.getNotes().add(dc);
 
 		when(noteService.saveNoteCommand(any())).thenReturn(dc);
@@ -54,10 +54,10 @@ public class NoteControllerTest {
 
 	@Test
 	public void testUpdateNote() throws Exception {
-		NoteCommand dc = new NoteCommand(1L, "Cook", recipe.getId());
+		NoteCommand dc = new NoteCommand("1", "Cook", recipe.getId());
 		recipe.getNotes().add(dc);
 
-		NoteCommand dcUpdated = new NoteCommand(1L, "Cook mildly.", recipe.getId());
+		NoteCommand dcUpdated = new NoteCommand("1", "Cook mildly.", recipe.getId());
 
 		when(noteService.saveNoteCommand(any())).thenReturn(dcUpdated);
 
@@ -69,17 +69,17 @@ public class NoteControllerTest {
 
 	@Test
 	public void testDeleteExistingNote() throws Exception {
-		NoteCommand dc = new NoteCommand(2L, "Cook", recipe.getId());
+		NoteCommand dc = new NoteCommand("2", "Cook", recipe.getId());
 		recipe.getNotes().add(dc);
 
 		mockMvc.perform(delete("/recipe/2/note/2/delete").sessionAttr("recipe", recipe)).andExpect(status().isOk())
-				.andExpect(jsonPath("$.id", is(2)));
+				.andExpect(jsonPath("$.id", is("2")));
 	}
 
 	@Test
 	public void testDeleteMissingNote() throws Exception {
 		mockMvc.perform(delete("/recipe/2/note/3/delete").sessionAttr("recipe", recipe)).andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.id", is(3)));
+				.andExpect(jsonPath("$.id", is("3")));
 	}
 
 	public static String asJsonString(final Object obj) {

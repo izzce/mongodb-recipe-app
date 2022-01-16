@@ -81,10 +81,9 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public Recipe findById(Long id) {
+	public Recipe findById(String id) {
 		Optional<Recipe> recipeOptional = recipeRepo.findById(id);
 		
-		//return recipeOptional.orElseThrow(() -> new RuntimeException("Recipe not found: " + id));
 		return recipeOptional.orElseThrow(() -> new NotFoundException("Recipe not found for id: " + id));
 	}
 	
@@ -182,7 +181,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public UnitOfMeasureCommand findUom(Long uomId) {
+	public UnitOfMeasureCommand findUom(String uomId, boolean flag) {
 		var uomOptional = uomRepo.findById(uomId);
 		if (uomOptional.isPresent()) {
 			return uom2uomc.convert(uomOptional.get());
@@ -202,12 +201,12 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Transactional
 	@Override
-	public RecipeCommand findRecipeCommandById(Long id) {
+	public RecipeCommand findRecipeCommandById(String id) {
 		return recipeToRecipeCommand.convert(findById(id));
 	}
 
 	@Override
-	public void delete(Long recipeId) {
+	public void delete(String recipeId) {
 		recipeRepo.deleteById(recipeId);
 		 
 		log.info("Deleted Recipe: {}", recipeId);

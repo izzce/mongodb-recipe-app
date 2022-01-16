@@ -17,6 +17,6 @@ public interface ImageService {
 	 * @param recipeId The id of the recipe. 
 	 * @param file the image file to be saved. 
 	 */
-	void save(Long recipeId, MultipartFile file);
+	void save(String recipeId, MultipartFile file);
 	
 }

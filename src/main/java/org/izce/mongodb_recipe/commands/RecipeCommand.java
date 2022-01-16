@@ -10,17 +10,17 @@ import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.izce.mongodb_recipe.model.Difficulty;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
 public class RecipeCommand {
-    private Long id;
+    private String id;
     
     @NotBlank
     @Size(min=3, max=255)
@@ -32,24 +32,35 @@ public class RecipeCommand {
     @Range(min=1, max=100)
     private Integer servings;
     private String source;
+    //@NotNull
+    private Difficulty difficulty;
     
     @URL
     private String url;
     @URL
     private String imageUrl;
+    
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Byte[] image;
-    //@NotNull
-    private Difficulty difficulty;
+    
     //@NotEmpty
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<DirectionCommand> directions = new LinkedHashSet<>();
     //@NotEmpty
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<IngredientCommand> ingredients = new LinkedHashSet<>();
     //@NotEmpty
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<CategoryCommand> categories = new LinkedHashSet<>();
-    
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<NoteCommand> notes = new LinkedHashSet<>();
     
-    public RecipeCommand(Long id) {
+    public RecipeCommand(String id) {
     	this.id = id;
     }
 }

@@ -45,13 +45,13 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 	
 	@Override
-	public Ingredient findById(Long id) {
+	public Ingredient findById(String id) {
 		Optional<Ingredient> ingredientOptional = ingredientRepo.findById(id);
 		return ingredientOptional.orElseThrow(() -> new RuntimeException("Ingredient not found: " + id));
 	}
 
 	@Override
-	public IngredientCommand findIngredientCommandById(Long id) {
+	public IngredientCommand findIngredientCommandById(String id) {
 		return ing2ingc.convert(findById(id));
 	}
 	
@@ -68,7 +68,7 @@ public class IngredientServiceImpl implements IngredientService {
 	
 	@Override
 	@Transactional
-	public void delete(Long ingredientId) {
+	public void delete(String ingredientId) {
 		ingredientRepo.deleteById(ingredientId);
 		 
 		log.info("Deleted Ingredient: {}", ingredientId);		 
@@ -85,7 +85,7 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 
 	@Override
-	public UnitOfMeasureCommand findUom(Long uomId) {
+	public UnitOfMeasureCommand findUom(String uomId, boolean flag) {
 		var uomOptional = uomRepo.findById(uomId);
 		if (uomOptional.isPresent()) {
 			return uom2uomc.convert(uomOptional.get());

@@ -18,7 +18,7 @@ public class IngredientFormatterTest {
 	
 	@BeforeEach
 	void setup() {
-		ingredientCommand = new IngredientCommand(1L, 1L, "sugar", new BigDecimal(1), new UnitOfMeasureCommand(1L, "Spoon"));	
+		ingredientCommand = new IngredientCommand("1", "1", "sugar", new BigDecimal(1), new UnitOfMeasureCommand("1", "Spoon"));	
 		ingredientFormatter = new IngredientFormatter();
 	}
 

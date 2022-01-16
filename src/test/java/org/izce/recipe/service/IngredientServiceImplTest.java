@@ -2,7 +2,6 @@ package org.izce.recipe.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -50,25 +49,25 @@ class IngredientServiceImplTest {
 		ingredientService = new IngredientServiceImpl(ingRepo, ic2i, i2ic, uomRepo, 
 				new UnitOfMeasureToUnitOfMeasureCommand());
 		uom = new UnitOfMeasure();
-		uom.setUom("spoon");
+		uom.setUom("Teaspoon");
 		ingredient = new Ingredient("sugar", 1, uom);
 	}
 
 	@Test
 	void testFindById() {
-		when(ingRepo.findById(anyLong())).thenReturn(Optional.of(ingredient));
-		assertEquals(ingredient.getDescription(), ingredientService.findById(1L).getDescription());
+		when(ingRepo.findById(anyString())).thenReturn(Optional.of(ingredient));
+		assertEquals(ingredient.getDescription(), ingredientService.findById("1").getDescription());
 		
-		verify(ingRepo, times(1)).findById(anyLong());
+		verify(ingRepo, times(1)).findById(anyString());
 	}
 
 	@Test
 	void testFindIngredientCommandById() {
-		when(ingRepo.findById(anyLong())).thenReturn(Optional.of(ingredient));
+		when(ingRepo.findById(anyString())).thenReturn(Optional.of(ingredient));
 		assertEquals(i2ic.convert(ingredient).getDescription(), 
-				ingredientService.findIngredientCommandById(anyLong()).getDescription());
+				ingredientService.findIngredientCommandById(anyString()).getDescription());
 		
-		verify(ingRepo, times(1)).findById(anyLong());
+		verify(ingRepo, times(1)).findById(anyString());
 	}
 
 	@Test
@@ -83,8 +82,8 @@ class IngredientServiceImplTest {
 
 	@Test
 	void testDelete() {
-		ingredientService.delete(1L);
-		verify(ingRepo, times(1)).deleteById(1L);
+		ingredientService.delete("1");
+		verify(ingRepo, times(1)).deleteById("1");
 	}
 
 	@Test
@@ -97,10 +96,10 @@ class IngredientServiceImplTest {
 
 	@Test
 	void testFindUomLong() {
-		when(uomRepo.findById(anyLong())).thenReturn(Optional.of(uom));
-		assertEquals(uom.getUom(), ingredientService.findUom(anyLong()).getUom());
+		when(uomRepo.findByUomIgnoreCase(anyString())).thenReturn(Optional.of(uom));
+		assertEquals(uom.getUom(), ingredientService.findUom("Teaspoon").getUom());
 		
-		verify(uomRepo, times(1)).findById(anyLong());
+		verify(uomRepo, times(1)).findByUomIgnoreCase(anyString());
 	}
 
 	@Test

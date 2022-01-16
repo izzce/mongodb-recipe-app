@@ -54,13 +54,13 @@ public class CategoryController {
 
 	@DeleteMapping(value = "/recipe/{recipeId}/category/{categoryId}/delete", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Map<String, Long> deleteCategory(
+	public Map<String, String> deleteCategory(
 			@ModelAttribute("recipe") RecipeCommand recipe,
-			@PathVariable Long recipeId, 
-			@PathVariable Long categoryId, 
+			@PathVariable String recipeId, 
+			@PathVariable String categoryId, 
 			HttpServletResponse resp) throws Exception {
 
-		boolean elementRemoved = recipe.getCategories().removeIf(e -> e.getId() == categoryId);
+		boolean elementRemoved = recipe.getCategories().removeIf(e -> e.getId().equals(categoryId));
 		if (!elementRemoved) {
 			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}

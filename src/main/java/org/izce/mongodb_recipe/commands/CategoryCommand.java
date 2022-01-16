@@ -5,20 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.NonNull;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class CategoryCommand implements Serializable {
 	private static final long serialVersionUID = 1185885918929722957L;
 	
-	private Long id;
+	private String id;
+	@NonNull
     private String description;
     
     public CategoryCommand(String description) {
@@ -31,7 +29,7 @@ public class CategoryCommand implements Serializable {
     
     public Map<String, String> toMap() {
     	Map<String, String> result = new HashMap<>();
-    	result.put("id", id == null ? "" : Long.toString(id));
+    	result.put("id", id == null ? "" : id);
     	result.put("description", description);
     	return result;
     }

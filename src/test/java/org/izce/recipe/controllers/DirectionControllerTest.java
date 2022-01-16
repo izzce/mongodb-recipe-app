@@ -41,8 +41,8 @@ public class DirectionControllerTest {
 
 	@Test
 	public void testAddDirection() throws Exception {
-		RecipeCommand rc = new RecipeCommand(2L);
-		DirectionCommand dc = new DirectionCommand(1L, "Cook");
+		RecipeCommand rc = new RecipeCommand("2");
+		DirectionCommand dc = new DirectionCommand("1", "Cook");
 		rc.getDirections().add(dc);
 		
 		when(directionService.saveDirectionCommand(any())).thenReturn(dc);
@@ -58,11 +58,11 @@ public class DirectionControllerTest {
 	
 	@Test
     public void testUpdateDirection() throws Exception {
-        RecipeCommand rc = new RecipeCommand(2L);
-        DirectionCommand dc = new DirectionCommand(1L, "Cook");
+        RecipeCommand rc = new RecipeCommand("2");
+        DirectionCommand dc = new DirectionCommand("1", "Cook");
 		rc.getDirections().add(dc);
 				
-		DirectionCommand dcUpdated = new DirectionCommand(1L, "Cook mildly.");
+		DirectionCommand dcUpdated = new DirectionCommand("1", "Cook mildly.");
 		
 		when(directionService.saveDirectionCommand(any())).thenReturn(dcUpdated);
 
@@ -78,27 +78,27 @@ public class DirectionControllerTest {
 	
 	@Test
     public void testDeleteExistingDirection() throws Exception {
-		 RecipeCommand rc = new RecipeCommand(2L);
+		 RecipeCommand rc = new RecipeCommand("2");
 	        
-		 DirectionCommand dc = new DirectionCommand(2L, "Cook");
+		 DirectionCommand dc = new DirectionCommand("2", "Cook");
 		rc.getDirections().add(dc);
 		 
 		 mockMvc.perform(delete("/recipe/2/direction/2/delete")
  				.sessionAttr("recipe", rc))
          .andExpect(status().isOk())
-         .andExpect(jsonPath("$.id", is(2)));
+         .andExpect(jsonPath("$.id", is("2")));
     }
 	
 	@Test
     public void testDeleteMissingDirection() throws Exception {
-		 RecipeCommand rc = new RecipeCommand(2L);
+		 RecipeCommand rc = new RecipeCommand("2");
 	        
 		 //DirectionCommand cc = new DirectionCommand(3L, "Stir");
 		
 		 mockMvc.perform(delete("/recipe/2/direction/3/delete")
  				.sessionAttr("recipe", rc))
          .andExpect(status().isNotFound())
-         .andExpect(jsonPath("$.id", is(3)));
+         .andExpect(jsonPath("$.id", is("3")));
     }
 	
 	

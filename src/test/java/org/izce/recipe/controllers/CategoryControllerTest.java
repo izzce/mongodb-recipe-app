@@ -42,9 +42,9 @@ public class CategoryControllerTest {
 	@Test
 	public void testAddExistingCategory() throws Exception {
 		RecipeCommand rc = new RecipeCommand();
-		rc.setId(2L);
+		rc.setId("2");
 		CategoryCommand cc = new CategoryCommand("Turkish");
-		cc.setId(1L);
+		cc.setId("1");
 		rc.getCategories().add(cc);
 		
 		when(recipeService.findCategoryByDescription(any())).thenReturn(cc);
@@ -60,9 +60,9 @@ public class CategoryControllerTest {
 	@Test
 	public void testAddNewCategory() throws Exception {
 		RecipeCommand rc = new RecipeCommand();
-		rc.setId(2L);
+		rc.setId("2");
 		CategoryCommand cc = new CategoryCommand("Italian");
-		cc.setId(2L);
+		cc.setId("2");
 		//rc.getCategories().add(cc);
 		
 		when(recipeService.findCategoryByDescription(any())).thenReturn(cc);
@@ -79,29 +79,29 @@ public class CategoryControllerTest {
 	@Test
     public void testDeleteExistingCategory() throws Exception {
         RecipeCommand rc = new RecipeCommand();
-        rc.setId(2L);
+        rc.setId("2");
 		CategoryCommand cc = new CategoryCommand("Turkish");
-		cc.setId(1L);
+		cc.setId("1");
 		rc.getCategories().add(cc);
 
         mockMvc.perform(delete("/recipe/2/category/1/delete")
         				.sessionAttr("recipe", rc))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id", is(1)));
+                .andExpect(jsonPath("id", is("1")));
     }
 	
 	@Test
     public void testDeleteMissingCategory() throws Exception {
 		 RecipeCommand rc = new RecipeCommand();
-		 rc.setId(2L);
+		 rc.setId("2");
 	        
         CategoryCommand cc = new CategoryCommand("Italian");
-		cc.setId(2L);
+		cc.setId("2");
 		
 		 mockMvc.perform(delete("/recipe/2/category/2/delete")
  				.sessionAttr("recipe", rc))
          .andExpect(status().isNotFound())
-         .andExpect(jsonPath("$.id", is(2)));
+         .andExpect(jsonPath("$.id", is("2")));
     }
 	
 	

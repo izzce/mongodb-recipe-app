@@ -1,18 +1,20 @@
 package org.izce.mongodb_recipe.commands;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class DirectionCommand {
-	private Long id;
+	private String id;
+	@NonNull
 	private String direction;
-	private Long recipeId;
+	private String recipeId;
 	
-	public DirectionCommand(Long id, String direction) {
+	public DirectionCommand(String id, String direction) {
 		this.id = id;
 		this.direction = direction;
 	}

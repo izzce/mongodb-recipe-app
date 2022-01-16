@@ -10,12 +10,12 @@ import org.izce.mongodb_recipe.model.Recipe;
 public interface RecipeService {
 	Iterable<Recipe> getRecipes();
 	Long getRecipesCount();
-	Recipe findById(Long id);
-	RecipeCommand findRecipeCommandById(Long id);
+	Recipe findById(String id);
+	RecipeCommand findRecipeCommandById(String id);
 	RecipeCommand saveRecipeCommand(RecipeCommand command);
 	CategoryCommand findCategoryByDescription(String description);
 	UnitOfMeasureCommand findUom(String uom);
-	UnitOfMeasureCommand findUom(Long uomId);
+	UnitOfMeasureCommand findUom(String uomId, boolean flag);
 	List<UnitOfMeasureCommand> findAllUoms();
-	void delete(Long recipeId);
+	void delete(String recipeId);
 }

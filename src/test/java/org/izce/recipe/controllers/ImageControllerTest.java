@@ -1,7 +1,6 @@
 package org.izce.recipe.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -52,8 +51,8 @@ public class ImageControllerTest {
 		mockMvc = MockMvcBuilders.standaloneSetup(imageController)
 				.setControllerAdvice(new ControllerExceptionHandler())
 				.build();
-		recipe = new RecipeCommand(1L);
-		when(recipeService.findRecipeCommandById(anyLong())).thenReturn(recipe);
+		recipe = new RecipeCommand("1");
+		when(recipeService.findRecipeCommandById(anyString())).thenReturn(recipe);
 		when(storageService.load(anyString())).thenReturn(Paths.get(new StorageProperties().getLocation(), TEST_FILE_NAME));
 	}
 	
@@ -78,7 +77,7 @@ public class ImageControllerTest {
         mockMvc.perform(multipart("/recipe/1/image").file(multipartFile))
                 .andExpect(status().isOk());
 
-        verify(imageService, times(1)).save(anyLong(), any());
+        verify(imageService, times(1)).save(anyString(), any());
 	}
 	
 }

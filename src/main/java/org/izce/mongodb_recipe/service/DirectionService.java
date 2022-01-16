@@ -4,8 +4,8 @@ import org.izce.mongodb_recipe.commands.DirectionCommand;
 import org.izce.mongodb_recipe.model.Direction;
 
 public interface DirectionService {
-	Direction findById(Long id);
-	DirectionCommand findDirectionCommandById(Long id);
+	Direction findById(String id);
+	DirectionCommand findDirectionCommandById(String id);
 	DirectionCommand saveDirectionCommand(DirectionCommand command);
-	void delete(Long directionId);
+	void delete(String directionId);
 }

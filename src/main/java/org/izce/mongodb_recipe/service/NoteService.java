@@ -4,8 +4,8 @@ import org.izce.mongodb_recipe.commands.NoteCommand;
 import org.izce.mongodb_recipe.model.Note;
 
 public interface NoteService {
-	Note findById(Long id);
-	NoteCommand findNoteCommandById(Long id);
+	Note findById(String id);
+	NoteCommand findNoteCommandById(String id);
 	NoteCommand saveNoteCommand(NoteCommand command);
-	void delete(Long noteId);
+	void delete(String noteId);
 }

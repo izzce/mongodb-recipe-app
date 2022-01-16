@@ -2,7 +2,7 @@ package org.izce.recipe.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,18 +40,18 @@ class DirectionServiceImplTest {
 
 	@Test
 	void testFindById() {
-		when(directionRepository.findById(anyLong())).thenReturn(Optional.of(direction));
-		assertEquals(direction.getDirection(), directionService.findById(1L).getDirection());
+		when(directionRepository.findById(anyString())).thenReturn(Optional.of(direction));
+		assertEquals(direction.getDirection(), directionService.findById("1").getDirection());
 		
-		verify(directionRepository, times(1)).findById(anyLong());
+		verify(directionRepository, times(1)).findById(anyString());
 	}
 
 	@Test
 	void testFindDirectionCommandById() {
-		when(directionRepository.findById(anyLong())).thenReturn(Optional.of(direction));
-		assertEquals(d2dc.convert(direction).getDirection(), directionService.findDirectionCommandById(anyLong()).getDirection());
+		when(directionRepository.findById(anyString())).thenReturn(Optional.of(direction));
+		assertEquals(d2dc.convert(direction).getDirection(), directionService.findDirectionCommandById(anyString()).getDirection());
 		
-		verify(directionRepository, times(1)).findById(anyLong());
+		verify(directionRepository, times(1)).findById(anyString());
 	}
 
 	@Test
@@ -66,8 +66,8 @@ class DirectionServiceImplTest {
 
 	@Test
 	void testDelete() {
-		directionService.delete(1L);
-		verify(directionRepository, times(1)).deleteById(1L);
+		directionService.delete("1");
+		verify(directionRepository, times(1)).deleteById("1");
 	}
 
 }

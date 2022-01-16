@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.math.BigDecimal;
+
 import org.izce.mongodb_recipe.commands.CategoryCommand;
 import org.izce.mongodb_recipe.commands.DirectionCommand;
 import org.izce.mongodb_recipe.commands.IngredientCommand;
 import org.izce.mongodb_recipe.commands.NoteCommand;
 import org.izce.mongodb_recipe.commands.RecipeCommand;
+import org.izce.mongodb_recipe.commands.UnitOfMeasureCommand;
 import org.izce.mongodb_recipe.converters.CategoryCommandToCategory;
 import org.izce.mongodb_recipe.converters.DirectionCommandToDirection;
 import org.izce.mongodb_recipe.converters.IngredientCommandToIngredient;
@@ -21,20 +24,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class RecipeCommandToRecipeTest {
-    public static final Long RECIPE_ID = 1L;
+    public static final String RECIPE_ID = "1";
     public static final Integer COOK_TIME = Integer.valueOf("5");
     public static final Integer PREP_TIME = Integer.valueOf("7");
     public static final String DESCRIPTION = "My Recipe";
-    public static final Long DIRECTION_ID = 100L;
+    public static final String DIRECTION_ID = "100";
     public static final Difficulty DIFFICULTY = Difficulty.EASY;
     public static final Integer SERVINGS = Integer.valueOf("3");
     public static final String SOURCE = "Source";
     public static final String URL = "Some URL";
-    public static final Long CAT_ID_1 = 1L;
-    public static final Long CAT_ID2 = 2L;
-    public static final Long INGRED_ID_1 = 3L;
-    public static final Long INGRED_ID_2 = 4L;
-    public static final Long NOTES_ID = 9L;
+    public static final String CAT_ID_1 = "1";
+    public static final String CAT_ID_2 = "2";
+    public static final String INGRED_ID_1 = "3";
+    public static final String INGRED_ID_2 = "4";
+    public static final String NOTES_ID = "9";
 
     RecipeCommandToRecipe converter;
 
@@ -52,11 +55,6 @@ public class RecipeCommandToRecipeTest {
     }
 
     @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new RecipeCommand()));
-    }
-
-    @Test
     public void convert() throws Exception {
         //given
         RecipeCommand recipeCommand = new RecipeCommand();
@@ -71,25 +69,31 @@ public class RecipeCommandToRecipeTest {
 
         NoteCommand notes = new NoteCommand();
         notes.setId(NOTES_ID);
+        notes.setNote("Cook");
         recipeCommand.getNotes().add(notes);
 
         CategoryCommand category = new CategoryCommand(CAT_ID_1, "Italian");
-        CategoryCommand category2 = new CategoryCommand(CAT_ID2, "Turkish");
+        CategoryCommand category2 = new CategoryCommand(CAT_ID_2, "Turkish");
 
         recipeCommand.getCategories().add(category);
         recipeCommand.getCategories().add(category2);
 
         IngredientCommand ingredient = new IngredientCommand();
         ingredient.setId(INGRED_ID_1);
+        ingredient.setDescription("Sugar");
+        ingredient.setAmount(new BigDecimal(0.5f));
+        ingredient.setUom(new UnitOfMeasureCommand("0", "Teaspoon"));
 
         IngredientCommand ingredient2 = new IngredientCommand();
         ingredient2.setId(INGRED_ID_2);
-
+        ingredient2.setDescription("Salt");
+        ingredient2.setAmount(new BigDecimal(0.5f));
+        ingredient2.setUom(new UnitOfMeasureCommand("1", "Tablespoon"));
+        
         recipeCommand.getIngredients().add(ingredient);
         recipeCommand.getIngredients().add(ingredient2);
         
-        DirectionCommand direction = new DirectionCommand();
-        direction.setId(DIRECTION_ID);
+        DirectionCommand direction = new DirectionCommand(DIRECTION_ID, "Stir");
         recipeCommand.getDirections().add(direction);
 
         //when

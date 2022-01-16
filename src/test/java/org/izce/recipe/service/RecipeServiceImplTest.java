@@ -2,8 +2,8 @@ package org.izce.recipe.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -120,20 +120,20 @@ public class RecipeServiceImplTest {
 	
 	@Test
 	void testFindById() {
-		when(repository.findById(anyLong())).thenReturn(Optional.of(recipe));
+		when(repository.findById(anyString())).thenReturn(Optional.of(recipe));
 		
-		assertEquals(recipe.getDescription(), service.findById(1L).getDescription());
+		assertEquals(recipe.getDescription(), service.findById("1").getDescription());
 		
-		verify(repository, times(1)).findById(anyLong());
+		verify(repository, times(1)).findById(anyString());
 	}
 	
 	@Test
 	void testFindRecipeCommandById() {
-		when(repository.findById(anyLong())).thenReturn(Optional.of(recipe));
+		when(repository.findById(anyString())).thenReturn(Optional.of(recipe));
 		
-		assertEquals(recipe.getDescription(), service.findRecipeCommandById(1L).getDescription());
+		assertEquals(recipe.getDescription(), service.findRecipeCommandById("1").getDescription());
 		
-		verify(repository, times(1)).findById(anyLong());
+		verify(repository, times(1)).findById(anyString());
 	}
 	
 	@Test
@@ -166,10 +166,10 @@ public class RecipeServiceImplTest {
 
 	@Test
 	void testFindUomLong() {
-		when(uomRepo.findById(anyLong())).thenReturn(Optional.of(uom1));
-		assertEquals(uom1.getUom(), service.findUom(anyLong()).getUom());
+		when(uomRepo.findById(anyString())).thenReturn(Optional.of(uom1));
+		assertEquals(uom1.getUom(), service.findUom("Spoon", true).getUom());
 		
-		verify(uomRepo, times(1)).findById(anyLong());
+		verify(uomRepo, times(1)).findById(anyString());
 	}
 
 	@Test
@@ -184,8 +184,8 @@ public class RecipeServiceImplTest {
 
 	@Test
 	void testDelete() {
-		service.delete(1L);
-		verify(repository, times(1)).deleteById(1L);
+		service.delete("1");
+		verify(repository, times(1)).deleteById("1");
 	}
 	
 	@Test

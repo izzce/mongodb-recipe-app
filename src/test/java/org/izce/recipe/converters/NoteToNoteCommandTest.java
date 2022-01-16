@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class NoteToNoteCommandTest {
 
-	public static final Long ID_VALUE = 1L;
+	public static final String ID_VALUE = "1";
 	public static final String RECIPE_NOTES = "Notes";
 	NoteToNoteCommand converter;
 

@@ -1,7 +1,6 @@
 package org.izce.recipe.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.izce.mongodb_recipe.commands.CategoryCommand;
@@ -13,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class CategoryToCategoryCommandTest {
 
-    public static final Long ID_VALUE = 1L;
+    public static final String ID_VALUE = "1";
     public static final String DESCRIPTION = "descript";
     CategoryToCategoryCommand converter;
 
@@ -25,11 +24,6 @@ public class CategoryToCategoryCommandTest {
     @Test
     public void testNullObject() throws Exception {
         assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Category()));
     }
 
     @Test

@@ -1,7 +1,7 @@
 package org.izce.recipe.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -40,7 +40,7 @@ public class RecipeControllerTest {
 				.build();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testGetRecipe() throws Exception {
 		mockMvc.perform(get("/recipe/1/show")).andExpect(status().isOk()).andExpect(view().name("recipe/show"));
 	}
@@ -54,7 +54,7 @@ public class RecipeControllerTest {
 	@Test
 	public void testPostNewRecipeForm() throws Exception {
 		RecipeCommand recipeCommand = new RecipeCommand();
-		recipeCommand.setId(2L);
+		recipeCommand.setId("2");
 
 		when(recipeService.saveRecipeCommand(any())).thenReturn(recipeCommand);
 
@@ -66,9 +66,9 @@ public class RecipeControllerTest {
 	@Test
 	public void testGetUpdateView() throws Exception {
 		RecipeCommand command = new RecipeCommand();
-		command.setId(2L);
+		command.setId("2");
 
-		when(recipeService.findRecipeCommandById(anyLong())).thenReturn(command);
+		when(recipeService.findRecipeCommandById(anyString())).thenReturn(command);
 
 		mockMvc.perform(get("/recipe/1/update")).andExpect(status().isOk()).andExpect(view().name("recipe/form"))
 				.andExpect(model().attributeExists("recipe"));
@@ -76,7 +76,7 @@ public class RecipeControllerTest {
 
 	@Test
 	public void testGetRecipeNotFound() throws Exception {
-		when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+		when(recipeService.findById(anyString())).thenThrow(NotFoundException.class);
 		mockMvc.perform(get("/recipe/1/show")).andExpect(status().isNotFound()).andExpect(view().name("error/404"));
 	}
 

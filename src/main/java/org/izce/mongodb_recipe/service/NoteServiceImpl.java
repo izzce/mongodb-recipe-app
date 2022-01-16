@@ -33,13 +33,13 @@ public class NoteServiceImpl implements NoteService {
 	}
 	
 	@Override
-	public Note findById(Long id) {
+	public Note findById(String id) {
 		Optional<Note> noteOptional = noteRepo.findById(id);
 		return noteOptional.orElseThrow(() -> new RuntimeException("Note not found: " + id));
 	}
 
 	@Override
-	public NoteCommand findNoteCommandById(Long id) {
+	public NoteCommand findNoteCommandById(String id) {
 		return n2nc.convert(findById(id));
 	}
 	
@@ -56,7 +56,7 @@ public class NoteServiceImpl implements NoteService {
 	
 	@Override
 	@Transactional
-	public void delete(Long noteId) {
+	public void delete(String noteId) {
 		noteRepo.deleteById(noteId);
 		 
 		log.info("Deleted Note: {}", noteId);

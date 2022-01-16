@@ -23,8 +23,8 @@ public class IngredientToIngredientCommandTest {
     public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
     public static final String DESCRIPTION = "Cheeseburger";
-    public static final Long UOM_ID = 1L;
-    public static final Long ID_VALUE = 1L;
+    public static final String UOM_ID = "1";
+    public static final String ID_VALUE = "1";
 
 
     IngredientToIngredientCommand converter;
@@ -37,30 +37,6 @@ public class IngredientToIngredientCommandTest {
     @Test
     public void testNullConvert() throws Exception {
         assertNull(converter.convert(null));
-    }
-
-    @Test
-    public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Ingredient()));
-    }
-
-    @Test
-    public void testConvertNullUOM() throws Exception {
-        //given
-        Ingredient ingredient = new Ingredient();
-        ingredient.setId(ID_VALUE);
-        ingredient.setRecipe(RECIPE);
-        ingredient.setAmount(AMOUNT);
-        ingredient.setDescription(DESCRIPTION);
-        ingredient.setUom(null);
-        //when
-        IngredientCommand ingredientCommand = converter.convert(ingredient);
-        //then
-        assertNull(ingredientCommand.getUom());
-        assertEquals(ID_VALUE, ingredientCommand.getId());
-       // assertEquals(RECIPE, ingredientCommand.get);
-        assertEquals(AMOUNT, ingredientCommand.getAmount());
-        assertEquals(DESCRIPTION, ingredientCommand.getDescription());
     }
 
     @Test

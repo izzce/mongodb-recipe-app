@@ -95,19 +95,19 @@ public class IngredientController {
 	@ResponseBody
 	public Map<String, String> deleteIngredient(
 			@ModelAttribute("recipe") RecipeCommand recipe,
-			@PathVariable Long recipeId, 
-			@PathVariable Long ingredientId, 
+			@PathVariable String recipeId, 
+			@PathVariable String ingredientId, 
 			Model model, 
 			HttpServletRequest req, 
 			HttpServletResponse resp) throws Exception {
 
-		if (true == recipe.getIngredients().removeIf(e -> e.getId() == ingredientId)) {
+		if (true == recipe.getIngredients().removeIf(e -> e.getId().equals(ingredientId))) {
 			ingredientService.delete(ingredientId);
 		} else {
 			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);			
 		}
 		
-		return Map.of("id", Long.toString(ingredientId), "status", "OK");
+		return Map.of("id", ingredientId, "status", "OK");
 	}
 
 }

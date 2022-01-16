@@ -16,7 +16,7 @@ class CategoryFormatterTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		categoryCommand = new CategoryCommand(1L, "Turkish");	
+		categoryCommand = new CategoryCommand("1", "Turkish");	
 		categoryFormatter = new CategoryFormatter();
 	}
 	

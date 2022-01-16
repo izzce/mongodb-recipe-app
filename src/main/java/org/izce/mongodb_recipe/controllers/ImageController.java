@@ -82,7 +82,9 @@ public class ImageController {
 	
 	@PostMapping("recipe/{id}/image")
 	@ResponseBody
-	public Map<String, String> handleImagePostForExistingRecipe(@PathVariable Long id, @RequestParam("image[]") MultipartFile [] imageFiles) {
+	public Map<String, String> handleImagePostForExistingRecipe(
+			@PathVariable String id, 
+			@RequestParam("image[]") MultipartFile [] imageFiles) {
 		for (var imageFile : imageFiles) {
 			imageService.save(id, imageFile);
 			// TODO how to return the url of new image?
@@ -92,7 +94,10 @@ public class ImageController {
 
 	
 	@GetMapping(value = "recipe/{id}/image", produces = MediaType.IMAGE_JPEG_VALUE)
-	public void renderImageFromDB(@PathVariable Long id, HttpServletResponse response, Model model) throws IOException {
+	public void renderImageFromDB(
+			@PathVariable String id, 
+			HttpServletResponse response, 
+			Model model) throws IOException {
 		RecipeCommand recipeCommand = recipeService.findRecipeCommandById(id);
 
 		if (recipeCommand.getImage() != null) {
