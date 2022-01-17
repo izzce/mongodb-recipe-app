@@ -15,9 +15,35 @@ jobs:
       - image: cimg/openjdk:11.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+    
     steps:
       # Checkout the code as the first step.
       - checkout
+      
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+   
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+          
+      - run: git config user.email "izzetcelik@gmail.com"
+      - run: git config user.name "Via CircleCI Build"
+      
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
@@ -28,7 +54,6 @@ jobs:
       #    command: mvn test
       
       # run tests! and gen code coverage
-      #- run: mvn integration-test cobertura:cobertura
       - run: mvn integration-test verify
 
       - store_test_results:
