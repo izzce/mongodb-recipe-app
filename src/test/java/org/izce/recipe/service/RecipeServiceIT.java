@@ -8,6 +8,7 @@ import org.izce.mongodb_recipe.converters.RecipeToRecipeCommand;
 import org.izce.mongodb_recipe.model.Recipe;
 import org.izce.mongodb_recipe.repositories.RecipeRepository;
 import org.izce.mongodb_recipe.service.RecipeService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 
+@Disabled
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class RecipeServiceIT {
