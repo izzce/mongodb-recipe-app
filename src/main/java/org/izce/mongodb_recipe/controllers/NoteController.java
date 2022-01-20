@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.izce.mongodb_recipe.commands.NoteCommand;
 import org.izce.mongodb_recipe.commands.RecipeCommand;
-import org.izce.mongodb_recipe.service.NoteService;
+import org.izce.mongodb_recipe.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

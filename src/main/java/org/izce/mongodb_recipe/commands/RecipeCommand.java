@@ -1,7 +1,7 @@
 package org.izce.mongodb_recipe.commands;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecipeCommand {
-    private String id;
+	private String id;
     
     @NotBlank
     @Size(min=3, max=255)
@@ -47,18 +47,18 @@ public class RecipeCommand {
     //@NotEmpty
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<DirectionCommand> directions = new LinkedHashSet<>();
+    private List<DirectionCommand> directions = new ArrayList<>();
     //@NotEmpty
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<IngredientCommand> ingredients = new LinkedHashSet<>();
+    private List<IngredientCommand> ingredients = new ArrayList<>();
     //@NotEmpty
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<CategoryCommand> categories = new LinkedHashSet<>();
+    private List<CategoryCommand> categories = new ArrayList<>();
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<NoteCommand> notes = new LinkedHashSet<>();
+    private List<NoteCommand> notes = new ArrayList<>();
     
     public RecipeCommand(String id) {
     	this.id = id;

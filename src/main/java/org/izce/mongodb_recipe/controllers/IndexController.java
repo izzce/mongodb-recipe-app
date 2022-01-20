@@ -1,6 +1,6 @@
 package org.izce.mongodb_recipe.controllers;
 
-import org.izce.mongodb_recipe.service.RecipeService;
+import org.izce.mongodb_recipe.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

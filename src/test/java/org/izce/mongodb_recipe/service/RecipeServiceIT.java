@@ -6,19 +6,19 @@ import org.izce.mongodb_recipe.commands.RecipeCommand;
 import org.izce.mongodb_recipe.converters.RecipeCommandToRecipe;
 import org.izce.mongodb_recipe.converters.RecipeToRecipeCommand;
 import org.izce.mongodb_recipe.model.Recipe;
+import org.izce.mongodb_recipe.repositories.CategoryRepository;
 import org.izce.mongodb_recipe.repositories.RecipeRepository;
-import org.junit.jupiter.api.Disabled;
+import org.izce.mongodb_recipe.repositories.UnitOfMeasureRepository;
+import org.izce.mongodb_recipe.services.RecipeService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 
-@Disabled
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+@AutoConfigureDataMongo
+@SpringBootTest()
 public class RecipeServiceIT {
 
     public static final String NEW_DESCRIPTION = "New Description";
@@ -34,8 +34,22 @@ public class RecipeServiceIT {
 
     @Autowired
     RecipeToRecipeCommand recipeToRecipeCommand;
+    
+    @Autowired
+    CategoryRepository categoryRepo;
+    
+    @Autowired
+    UnitOfMeasureRepository uomRepo;
 
-    @Transactional
+    @BeforeEach
+    public void setUp() {
+    	categoryRepo.deleteAll();
+    	uomRepo.deleteAll();
+    	
+    	//BootStrap_MongoDB bootstrap = new BootStrap_MongoDB(categoryRepo, uomRepo);
+    	//bootstrap.onApplicationEvent(null);
+    }
+    
     @Test
     public void testSaveOfDescription() throws Exception {
         //given

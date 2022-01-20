@@ -2,8 +2,8 @@ package org.izce.mongodb_recipe;
 
 import org.izce.mongodb_recipe.formatters.CategoryFormatter;
 import org.izce.mongodb_recipe.formatters.IngredientFormatter;
-import org.izce.mongodb_recipe.service.StorageProperties;
-import org.izce.mongodb_recipe.service.StorageService;
+import org.izce.mongodb_recipe.services.StorageProperties;
+import org.izce.mongodb_recipe.services.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

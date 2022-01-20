@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.izce.mongodb_recipe.commands.CategoryCommand;
 import org.izce.mongodb_recipe.commands.RecipeCommand;
-import org.izce.mongodb_recipe.service.RecipeService;
+import org.izce.mongodb_recipe.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class CategoryController {
 	@PostMapping(value = "/recipe/{recipeId}/category/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Map<String, String> addCategory(
-			@PathVariable Long recipeId, 
+			@PathVariable String recipeId, 
 			@RequestBody CategoryCommand category,
 			@ModelAttribute("recipe") RecipeCommand recipe,
 			Model model,

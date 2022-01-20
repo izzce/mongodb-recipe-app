@@ -16,7 +16,7 @@ import org.izce.mongodb_recipe.commands.IngredientCommand;
 import org.izce.mongodb_recipe.commands.RecipeCommand;
 import org.izce.mongodb_recipe.commands.UnitOfMeasureCommand;
 import org.izce.mongodb_recipe.controllers.IngredientController;
-import org.izce.mongodb_recipe.service.IngredientService;
+import org.izce.mongodb_recipe.services.IngredientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

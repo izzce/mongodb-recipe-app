@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.izce.mongodb_recipe.commands.RecipeCommand;
-import org.izce.mongodb_recipe.service.ImageService;
-import org.izce.mongodb_recipe.service.RecipeService;
-import org.izce.mongodb_recipe.service.StorageService;
+import org.izce.mongodb_recipe.services.ImageService;
+import org.izce.mongodb_recipe.services.RecipeService;
+import org.izce.mongodb_recipe.services.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

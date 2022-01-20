@@ -13,7 +13,7 @@ import org.izce.mongodb_recipe.commands.RecipeCommand;
 import org.izce.mongodb_recipe.controllers.ControllerExceptionHandler;
 import org.izce.mongodb_recipe.controllers.RecipeController;
 import org.izce.mongodb_recipe.exceptions.NotFoundException;
-import org.izce.mongodb_recipe.service.RecipeService;
+import org.izce.mongodb_recipe.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

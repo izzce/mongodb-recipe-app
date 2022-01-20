@@ -8,9 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
 
-import org.izce.mongodb_recipe.service.FilesystemStorageServiceImpl;
-import org.izce.mongodb_recipe.service.StorageProperties;
-import org.izce.mongodb_recipe.service.StorageService;
+import org.izce.mongodb_recipe.services.FilesystemStorageServiceImpl;
+import org.izce.mongodb_recipe.services.StorageProperties;
+import org.izce.mongodb_recipe.services.StorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;

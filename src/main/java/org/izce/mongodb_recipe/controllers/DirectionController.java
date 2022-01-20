@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.izce.mongodb_recipe.commands.DirectionCommand;
 import org.izce.mongodb_recipe.commands.RecipeCommand;
-import org.izce.mongodb_recipe.service.DirectionService;
+import org.izce.mongodb_recipe.services.DirectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -53,7 +53,7 @@ public class DirectionController {
 	@PostMapping(value = "/recipe/{recipeId}/direction/{directionId}/update", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Map<String, String> updateDirection(
-			@PathVariable Long recipeId, 
+			@PathVariable String recipeId, 
 			@RequestBody DirectionCommand direction,
 			@ModelAttribute("recipe") RecipeCommand recipe,
 			Model model) throws Exception {

@@ -35,7 +35,7 @@ import org.izce.mongodb_recipe.repositories.IngredientRepository;
 import org.izce.mongodb_recipe.repositories.NoteRepository;
 import org.izce.mongodb_recipe.repositories.RecipeRepository;
 import org.izce.mongodb_recipe.repositories.UnitOfMeasureRepository;
-import org.izce.mongodb_recipe.service.RecipeServiceImpl;
+import org.izce.mongodb_recipe.services.RecipeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

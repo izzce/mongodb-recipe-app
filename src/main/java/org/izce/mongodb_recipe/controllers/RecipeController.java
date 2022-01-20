@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.izce.mongodb_recipe.commands.RecipeCommand;
 import org.izce.mongodb_recipe.exceptions.NotFoundException;
-import org.izce.mongodb_recipe.service.RecipeService;
+import org.izce.mongodb_recipe.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -38,10 +38,10 @@ public class RecipeController {
 
 	@GetMapping("/recipe/{id}/show")
 	public String showRecipe(
-			@PathVariable Long id, 
+			@PathVariable String id, 
 			Model model) {
 		log.debug("recipe/show page is requested!");
-		model.addAttribute("recipe", recipeService.findById(Long.toString(id)));
+		model.addAttribute("recipe", recipeService.findById(id));
 		return "recipe/show";
 	}
 
@@ -55,9 +55,9 @@ public class RecipeController {
 	}
 
 	@GetMapping("/recipe/{id}/update")
-	public String updateRecipe(@PathVariable Long id, Model model) {
+	public String updateRecipe(@PathVariable String id, Model model) {
 		log.debug("recipe/{}/update page is requested!", id);
-		model.addAttribute("recipe", recipeService.findRecipeCommandById(Long.toString(id)));
+		model.addAttribute("recipe", recipeService.findRecipeCommandById(id));
 		model.addAttribute("uomList", recipeService.findAllUoms());
 
 		return "recipe/form";
@@ -98,9 +98,9 @@ public class RecipeController {
 	}
 	
 	@GetMapping(value = "/recipe/{recipeId}/delete")
-	public String deleteRecipe(@PathVariable Long recipeId) throws Exception {
+	public String deleteRecipe(@PathVariable String recipeId) throws Exception {
 		
-		recipeService.delete(Long.toString(recipeId));
+		recipeService.delete(recipeId);
 		
 		return "redirect:/index";
 	}

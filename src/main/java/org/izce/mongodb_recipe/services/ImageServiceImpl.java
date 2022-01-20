@@ -1,4 +1,4 @@
-package org.izce.mongodb_recipe.service;
+package org.izce.mongodb_recipe.services;
 
 import java.io.IOException;
 

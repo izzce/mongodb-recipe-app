@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.izce.mongodb_recipe.commands.DirectionCommand;
 import org.izce.mongodb_recipe.commands.RecipeCommand;
 import org.izce.mongodb_recipe.controllers.DirectionController;
-import org.izce.mongodb_recipe.service.DirectionService;
+import org.izce.mongodb_recipe.services.DirectionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
