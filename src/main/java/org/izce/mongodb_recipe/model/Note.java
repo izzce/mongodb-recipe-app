@@ -1,5 +1,6 @@
 package org.izce.mongodb_recipe.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,8 +17,8 @@ import lombok.ToString;
 @Document
 public class Note {
 	
-	@org.springframework.data.annotation.Id
-	private String Id;
+	@Id
+	private String id;
 	@NonNull
 	private String note;
 	

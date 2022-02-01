@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Document
 public class Ingredient {
 	
@@ -26,7 +28,7 @@ public class Ingredient {
 	@NonNull
 	private BigDecimal amount;
 	@NonNull 
-	@DBRef
+	@DBRef(db = "unitOfMeasure")
 	private UnitOfMeasure uom;
 
 	@ToString.Exclude

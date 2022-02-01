@@ -17,7 +17,7 @@ public class IngredientCommand {
     private String description;
     @NonNull
     private BigDecimal amount;
-    @NonNull
+    //@NonNull
     private UnitOfMeasureCommand uom;
     
     @Override

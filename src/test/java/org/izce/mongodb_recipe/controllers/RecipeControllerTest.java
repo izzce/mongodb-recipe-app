@@ -10,8 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.izce.mongodb_recipe.commands.RecipeCommand;
-import org.izce.mongodb_recipe.controllers.ControllerExceptionHandler;
-import org.izce.mongodb_recipe.controllers.RecipeController;
 import org.izce.mongodb_recipe.exceptions.NotFoundException;
 import org.izce.mongodb_recipe.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,8 +34,7 @@ public class RecipeControllerTest {
 		MockitoAnnotations.openMocks(this);
 		recipeController = new RecipeController(recipeService);
 		mockMvc = MockMvcBuilders.standaloneSetup(recipeController)
-				.setControllerAdvice(new ControllerExceptionHandler())
-				.build();
+				.setControllerAdvice(new ControllerExceptionHandler()).build();
 	}
 
 	@Test
@@ -78,10 +75,5 @@ public class RecipeControllerTest {
 	public void testGetRecipeNotFound() throws Exception {
 		when(recipeService.findById(anyString())).thenThrow(NotFoundException.class);
 		mockMvc.perform(get("/recipe/1/show")).andExpect(status().isNotFound()).andExpect(view().name("error/404"));
-	}
-
-	@Test
-	public void testGetRecipeNumberFormatException() throws Exception {
-		mockMvc.perform(get("/recipe/adsdfs/show")).andExpect(status().isBadRequest()).andExpect(view().name("error/400"));
 	}
 }
